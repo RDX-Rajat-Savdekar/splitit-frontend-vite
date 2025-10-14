@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = '/api/friends/';
+const API_URL = import.meta.env.VITE_API_URL + '/api/friends/';
+
 
 // Get user friends
 const getFriends = async (token) => {
