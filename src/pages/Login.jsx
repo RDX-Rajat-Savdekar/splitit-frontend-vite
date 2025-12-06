@@ -42,6 +42,28 @@ function Login() {
     }
   };
 
+
+  const handleGuestLogin = async () => {
+    const demoEmail = 'demo@gmail.com';
+    const demoPassword = 'demouser';
+    setFormData({email:demoEmail,password:demoPassword});
+
+    const loginAsGuest = async () => {
+      const userData = { email: demoEmail, password: demoPassword };
+      try{
+        const loggedInUser = await authService.login(userData);
+        useAuthStore.setState({user: loggedInUser});
+
+      }
+      catch(error){
+        console.error(error);
+        toast.error(error.message);
+      }
+    };
+
+    loginAsGuest();
+  }
+
   return (
     <>
       <section className="text-center">
@@ -82,6 +104,15 @@ function Login() {
               Submit
             </button>
           </div>
+          <div className="mt-4">
+    <button
+      type="button"
+      onClick={handleGuestLogin}
+      className="w-full bg-gray-500 text-white font-bold py-2 rounded-lg hover:bg-gray-600 transition duration-200"
+    >
+      Guest Login (Demo)
+    </button>
+  </div>
         </form>
       </div>
     </>

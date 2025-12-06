@@ -37,9 +37,27 @@ const createGroup = async (groupData, token) => {
   return response.data;
 };
 
+// Update a group
+const updateGroup = async (groupId, groupData, token) => {
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const response = await axios.put(API_URL + groupId, groupData, config);
+  return response.data;
+};
+
+// Delete a group
+const deleteGroup = async (groupId, token) => {
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const response = await axios.delete(API_URL + groupId, config);
+  return response.data;
+};
+
 const groupService = {
   getGroups,
   getGroup,
-  createGroup, // Add this
+  createGroup,
+  updateGroup, // Add this
+  deleteGroup, // Add this
 };
+
+
 export default groupService;

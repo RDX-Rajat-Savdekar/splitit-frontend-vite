@@ -21,13 +21,29 @@ const addExpense = async (expenseData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
+  // The expenseData object will now contain paidBy, splitType, shares, etc.
   const response = await axios.post(API_URL, expenseData, config);
+  return response.data;
+};
+
+// Update an expense
+const updateExpense = async (expenseId, expenseData, token) => {
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const response = await axios.put(API_URL + expenseId, expenseData, config);
+  return response.data;
+};
+
+// Delete an expense
+const deleteExpense = async (expenseId, token) => {
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const response = await axios.delete(API_URL + expenseId, config);
   return response.data;
 };
 
 const expenseService = {
   getExpensesForGroup,
-  addExpense, // Add this
+  addExpense,
+  updateExpense, // Add this
+  deleteExpense, // Add this
 };
-
 export default expenseService;

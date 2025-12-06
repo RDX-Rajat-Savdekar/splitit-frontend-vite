@@ -12,8 +12,20 @@ const getBalance = async (token) => {
   return response.data;
 };
 
+// Get user's detailed, person-to-person balance
+const getDetailedBalance = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(API_URL + 'detailed-balance', config);
+  return response.data;
+};
+
 const userService = {
   getBalance,
+  getDetailedBalance, // Add this
 };
 
 export default userService;
